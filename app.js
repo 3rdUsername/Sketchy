@@ -67,7 +67,8 @@ function stopDrawing() {
 function scrollCanvas(event) {
     //stopDrawing()
     const delta = event.deltaY ;
-    if (delta > 0 || topY <=0) {
+    if (delta > 0 || topY <0) {
+        debugger;
         // Adjust the offsetY based on the scroll direction
         offsetY -= delta;
         topY-=delta;
