@@ -5,8 +5,6 @@ let isDrawing = false;
 let curveNo = 0;
 let drawingPath = []; // Explicitly type the path array
 let drawingHistory = []; // Type the history array
-let offsetX = 0;
-let offsetY = 0;
 let topY = 0;
 // Check for touch support using type guards
 const isTouchDevice = (() => {
@@ -29,8 +27,8 @@ function startDrawing(e) {
 function draw(e) {
     if (!isDrawing)
         return;
-    const x = e.clientX - offsetX;
-    const y = e.clientY - offsetY;
+    const x = e.offsetX;
+    const y = e.offsetY;
     drawingPath.push({ x, y, curveNo });
     ctx.lineWidth = 5;
     ctx.lineCap = "round";
@@ -52,7 +50,6 @@ function stopDrawing() {
 function scrollCanvas(event) {
     const delta = event.deltaY;
     if (delta > 0 || topY < 0) {
-        offsetY -= delta;
         topY -= delta;
         canvas.height += Math.abs(delta);
         redrawCanvas();
